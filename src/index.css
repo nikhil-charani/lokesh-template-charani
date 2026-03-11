@@ -1,68 +1,121 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+    background:
+        radial-gradient(circle at 70% 50%,
+            rgba(0, 120, 200, 0.45) 0%,
+            rgba(0, 80, 150, 0.25) 25%,
+            rgba(0, 40, 80, 0.1) 45%,
+            rgba(0, 10, 30, 1) 70%),
+
+        linear-gradient(to right,
+            #000b1c 0%,
+            #001f3f 50%,
+            #000b1c 100%);
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* static stars */
+
+body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        radial-gradient(#6fd6ff 1px, transparent 1px);
+
+    background-size: 90px 90px;
+
+    opacity: 0.18;
+
+    animation: twinkle 6s ease-in-out infinite alternate;
+
+    pointer-events: none;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+@keyframes twinkle {
+    0% {
+        opacity: 0.15;
+    }
+
+    50% {
+        opacity: 0.25;
+    }
+
+    100% {
+        opacity: 0.15;
+    }
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+/* logo glow */
+
+/* logo glow + pulse */
+
+.logo-glow {
+    animation: logoPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes logoPulse {
+
+    0% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 10px #3ec3ff);
+    }
+
+    50% {
+        transform: scale(1.01);
+        filter: drop-shadow(0 0 18px #6fd6ff);
+    }
+
+    100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 10px #3ec3ff);
+    }
+
+}
+
+/* Global Scrollbar Styles */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Light Mode Scrollbar */
+::-webkit-scrollbar-thumb {
+    background: #e2e8f0;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #cbd5e1;
+}
+
+/* Dark Mode Scrollbar */
+.dark ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    border: 1px solid transparent;
+    background-clip: content-box;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+    background: rgba(62, 195, 255, 0.4);
+}
+
+/* Scrollbar Thin Utility Support */
+.scrollbar-thin::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
 }

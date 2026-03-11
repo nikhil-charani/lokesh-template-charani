@@ -1,35 +1,54 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from "react";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 
-function App() {
-  const [count, setCount] = useState(0)
+import LandingPage from "@/pages/LandingPage";
+import Dashboard from "@/pages/Dashboard";
+import AuthPage from "@/pages/auth/AuthPage";
+
+// Protected Route Component to prevent unauthorized access
+const ProtectedRoute = ({ children, isAuthenticated }) => {
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+  return children;
+};
+
+export default function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return localStorage.getItem("isAuthenticated") === "true";
+  });
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Optionally handle any other side effects on auth change
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("isAuthenticated");
+    localStorage.removeItem("currentUser");
+    setIsAuthenticated(false);
+    navigate("/");
+    window.location.reload(); // Force a clean slate
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/login" element={<AuthPage onLoginSuccess={() => setIsAuthenticated(true)} />} />
+      <Route path="/register" element={<AuthPage onLoginSuccess={() => setIsAuthenticated(true)} initialRegister={true} />} />
 
-export default App
+      {/* 
+        The Dashboard is now the parent route for the nested features.
+        The /* is crucial since Dashboard will have its own nested routes
+      */}
+      <Route
+        path="/dashboard/*"
+        element={
+          <ProtectedRoute isAuthenticated={isAuthenticated}>
+            <Dashboard handleLogout={handleLogout} />
+          </ProtectedRoute>
+        }
+      />
+    </Routes>
+  );
+}
