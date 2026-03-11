@@ -2,7 +2,7 @@ import StarCanvas from "@/components/auth/StarCanvas";
 import '@/index.css';
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import logo from '@/assets/NEXI5-logo.png';
+import logo from '@/assets/nexi5-logo.png';
 
 export default function AuthLayout({ children }) {
   return (

@@ -13,8 +13,6 @@ export * from './attendance/mockAttendance';
 // Finance
 export * from './finance/mockInvoices';
 export * from './finance/mockExpenses';
-export * from './finance/mockInvoices';
-export * from './finance/mockExpenses';
 export * from './finance/expenseStats';
 export * from './finance/accountsData';
 

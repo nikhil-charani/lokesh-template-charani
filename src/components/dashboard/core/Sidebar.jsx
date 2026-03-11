@@ -5,7 +5,7 @@ import {
     CalendarDays, CalendarCheck, CreditCard, Wallet, FileText, FolderKanban,
     ChevronRight, X, LogOut
 } from 'lucide-react';
-import logo from '@/assets/NEXI5-logo.png';
+import logo from '@/assets/nexi5-logo.png';
 
 const hrmsMenu = [
     { icon: LayoutDashboard, label: 'Dashboard', path: '/dashboard', exact: true },

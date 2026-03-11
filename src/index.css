@@ -119,3 +119,46 @@ body::before {
     width: 4px;
     height: 4px;
 }
+
+/* Authentication Background */
+.auth-background {
+    background: radial-gradient(circle at 70% 50%,
+            rgba(0, 120, 200, 0.4) 0%,
+            rgba(0, 80, 150, 0.2) 25%,
+            rgba(0, 10, 30, 1) 70%),
+        linear-gradient(to right, #000b1c 0%, #001f3f 50%, #000b1c 100%);
+    background-attachment: fixed;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.animate-slide-in-right {
+    animation: slideInRight 0.4s ease-out forwards;
+}
